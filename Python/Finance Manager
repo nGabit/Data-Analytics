@@ -1,0 +1,112 @@
+class FinancialOperation:
+    def __init__(self, amount, category, date, description):
+        self.amount = amount
+        self.category = category
+        self.date = date
+        self.description = description
+
+    def display_info(selfdelf):
+        return f"{self.date} - {self.category}: {self.amount} dol. ({self.description})"
+
+class FinanceManager:
+    def __init__(self):
+        self.operstions = []
+
+
+def add_operation(self, operation):
+
+    self.operations.append(operation)
+    print("operation deleted.")
+
+
+def remove_operation(self, index):
+
+    if 0 <= index < len(self.operations):
+        del self.operations[index]
+        print("oper removed.")
+    else:
+        print("Неверный индекс.")
+
+def display_operations(self):
+    for ind, oper in enumerate(operations):
+        print(f"{ind}, {oper}")
+
+def calculate_balance(self):
+    Total = sum(oper[5] for oper in self.operations)
+    return Total
+
+def find_operations_by_category(self):
+    return [op for op in self.operations if op.category == category]
+
+def analyze_finances(self):
+    analysis = {}
+    for op in self.operations:
+        if op.category not in analysis:
+            analysis[op.category] = 0
+        analysis[op.category] += op.amount
+    return analysis
+
+def get_operation_from_user():
+    """
+    Функция для получения данных операции от пользователя.
+    """
+    amount = float(input("Введите сумму операции: "))
+    category = input("Введите категорию: ")
+    date_str = input("Введите дату (формат ГГГГ-ММ-ДД): ")
+    description = input("Введите описание операции: ")
+    date = datetime.strptime(date_str, "%Y-%m-%d").date()
+    return FinancialOperation(amount, category, date, description)
+
+def main():
+    finance_manager = FinanceManager()
+
+    while True:
+        print("\nМеню:")
+        print("1. Добавить операцию")
+        print("2. Удалить операцию")
+        print("3. Показать все операции")
+        print("4. Показать общий баланс")
+        print("5. Найти операции по категории")
+        print("6. Анализировать финансы")
+        print("7. Выйти")
+
+        choice = input("Выберите действие (1-7): ")
+
+        if choice == '1':
+            operation = get_operation_from_user()
+            finance_manager.add_operation(operation)
+
+        elif choice == '2':
+            index = int(input("Введите индекс операции для удаления: "))
+            finance_manager.remove_operation(index)
+
+        elif choice == '3':
+            finance_manager.display_operations()
+
+        elif choice == '4':
+            print(f"Общий баланс: {finance_manager.calculate_balance()} руб.")
+
+        elif choice == '5':
+            category = input("Введите категорию: ")
+            found_operations = finance_manager.find_operations_by_category(category)
+            if found_operations:
+                for op in found_operations:
+                    print(op.display_info())
+            else:
+                print("Операции не найдены.")
+
+        elif choice == '6':
+            analysis = finance_manager.analyze_finances()
+            print("Анализ финансов по категориям:")
+            for category, total in analysis.items():
+                print(f"{category}: {total} руб.")
+
+        elif choice == '7':
+            print("Выход из приложения.")
+            break
+
+        else:
+            print("Неверный выбор. Пожалуйста, попробуйте снова.")
+
+if __name__ == "__main__":
+    main()
